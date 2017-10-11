@@ -54,6 +54,7 @@ class App extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.onSort = this.onSort.bind(this);
   }
 
   needsToSearchTopstories(searchTerm) {
@@ -122,6 +123,10 @@ class App extends Component {
         [searchKey]: { hits: updatedHits, page }
       }
     });
+  }
+
+  onSort(sortKey) {
+    this.setState({ sortKey });
   }
 
   render() {
