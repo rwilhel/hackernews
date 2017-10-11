@@ -46,6 +46,7 @@ class App extends Component {
       searchTerm: DEFAULT_QUERY,
       isLoading: false,
       sortKey: 'NONE',
+      isSortReverse: false,
     };
 
     this.needsToSearchTopstories = this.needsToSearchTopstories.bind(this);
