@@ -28,6 +28,13 @@ const smallColumn = {
 const isSearched = (searchTerm) => (item) =>
     !searchTerm || item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
+const SORTS = {
+  NONE: list => list,
+  TITLE: list => sortBy(list, 'title'),
+  AUTHOR: list => sortBy(list, 'author'),
+  COMMENTS: list => sortBy(list, 'num_comments').reverse(),
+  POINTS: list => sortBy(list, 'points').reverse(),
+};
 
 class App extends Component {
   constructor(props) {
@@ -37,6 +44,8 @@ class App extends Component {
       result: null,
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
+      isLoading: false,
+      sortKey: 'NONE',
     };
 
     this.needsToSearchTopstories = this.needsToSearchTopstories.bind(this);
