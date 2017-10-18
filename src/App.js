@@ -63,22 +63,26 @@ class App extends Component {
 
   setSearchTopstories(result) {
     const { hits, page } = result;
-    const { searchKey, results } = this.state;
 
-    const oldHits = results && results[searchKey]
+    this.setState(prevState => {
+      const { searchKey, results } = this.state;
+
+      const oldHits = results && results[searchKey]
       ? results[searchKey].hits
       : [];
 
-    const updatedHits = [
-      ...oldHits,
-      ...hits
-    ];
+      const updatedHits = [
+        ...oldHits,
+        ...hits
+      ];
 
-    this.setState({
-      results: {
-        ...results,
-        [searchKey]: { hits: updatedHits, page }
-      }
+      return {
+        results: {
+          ...results,
+          [searchKey]: { hits: updatedHits, page }
+        },
+        isLoading: false
+      };
     });
   }
 
