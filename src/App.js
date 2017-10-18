@@ -136,7 +136,7 @@ class App extends Component {
       results,
       searchKey,
       sortKey,
-      isSortReverse
+      isLoading
     } = this.state;
 
     const page = (
