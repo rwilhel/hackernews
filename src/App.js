@@ -250,6 +250,15 @@ class Table extends Component {
           </span>
           <span style={{ width: '10%' }}>
             <Sort
+              sortKey={'COMMENTS'}
+              onSort={this.onSort}
+              activeSortKey={sortKey}
+            >
+              Comments
+            </Sort>
+          </span>
+          <span style={{ width: '10%' }}>
+            <Sort
               sortKey={'POINTS'}
               onSort={this.onSort}
               activeSortKey={sortKey}
