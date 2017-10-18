@@ -164,9 +164,6 @@ class App extends Component {
         </div>
         <Table
           list={list}
-          sortKey={sortKey}
-          isSortReverse={isSortReverse}
-          onSort={this.onSort}
           onDismiss={this.onDismiss}
         />
         <div className="interactions">
@@ -217,11 +214,13 @@ class Table extends Component {
   render() {
     const {
       list,
-      sortKey,
-      isSortReverse,
-      onSort,
       onDismiss
     } = this.props;
+
+    const {
+      sortKey,
+      isSortReverse,
+    } = this.state;
 
     const sortedList = SORTS[sortKey](list);
     const reverseSortedList = isSortReverse
@@ -234,7 +233,7 @@ class Table extends Component {
           <span style={{ width: '40%' }}>
             <Sort
               sortKey={'TITLE'}
-              onSort={onSort}
+              onSort={this.onSort}
               activeSortKey={sortKey}
             >
               Title
@@ -243,7 +242,7 @@ class Table extends Component {
           <span style={{ width: '30%' }}>
             <Sort
               sortKey={'AUTHOR'}
-              onSort={onSort}
+              onSort={this.onSort}
               activeSortKey={sortKey}
             >
               Author
@@ -252,7 +251,7 @@ class Table extends Component {
           <span style={{ width: '10%' }}>
             <Sort
               sortKey={'POINTS'}
-              onSort={onSort}
+              onSort={this.onSort}
               activeSortKey={sortKey}
             >
               Points
