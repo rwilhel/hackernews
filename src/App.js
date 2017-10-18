@@ -37,6 +37,27 @@ const SORTS = {
   POINTS: list => sortBy(list, 'points').reverse(),
 };
 
+const updateSearchTopstoriesState = (hits, page) => (prevState) => {
+  const { searchKey, results } = prevState;
+
+  const oldHits = results && results[searchKey]
+  ? results[searchKey].hits
+  : [];
+
+  const updatedHits = [
+    ...oldHits,
+    ...hits
+  ];
+
+  return {
+    results: {
+      ...results,
+      [searchKey]: { hits: updatedHits, page }
+    },
+    isLoading: false
+  };
+};
+
 class App extends Component {
 
   constructor(props) {
@@ -65,27 +86,6 @@ class App extends Component {
     const { hits, page } = result;
     this.setState(updateSearchTopstoriesState(hits, page));
   }
-
-  const updateSearchTopstoriesState = (hits, page) => (prevState) +> {
-    const { searchKey, results } = this.state;
-
-    const oldHits = results && results[searchKey]
-    ? results[searchKey].hits
-    : [];
-
-    const updatedHits = [
-      ...oldHits,
-      ...hits
-    ];
-
-    return {
-      results: {
-        ...results,
-        [searchKey]: { hits: updatedHits, page }
-      },
-      isLoading: false
-    };
-  });
 
   fetchSearchTopstories(searchTerm, page) {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
